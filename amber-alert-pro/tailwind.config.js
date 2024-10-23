@@ -4,8 +4,16 @@ module.exports = {
     './public/index.html',        // Scans the index.html file
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#007bff',
+        secondary: '#6c757d',
+        background: '#f8f9fa',
+      },
+      fontFamily: {
+        primary: ['Arial', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
-}
-
+};
