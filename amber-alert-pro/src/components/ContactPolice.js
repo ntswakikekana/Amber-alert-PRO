@@ -30,4 +30,7 @@ const ContactPolice = () => {
 };
 
 export default ContactPolice;
+<<<<<<< HEAD
 
+=======
+>>>>>>> add0763fd0aa509c55be5d6a12a250ab9d085b3c
