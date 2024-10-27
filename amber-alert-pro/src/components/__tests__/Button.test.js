@@ -6,13 +6,13 @@ describe('Button Component', () => {
   const mockOnClick = jest.fn();
 
   it('renders the Button component', () => {
-    render(<Button onClick={mockOnClick}>Click Me</Button>);
-    const buttonElement = screen.getByText(/click me/i );
+    render(<Button label="Click Me" onClick={mockOnClick} />);
+    const buttonElement = screen.getByText(/click me/i);
     expect(buttonElement).toBeInTheDocument();
   });
 
   it('calls onClick when button is clicked', () => {
-    render(<Button onClick={mockOnClick}>Click Me</Button>);
+    render(<Button label="Click Me" onClick={mockOnClick} />);
     const buttonElement = screen.getByRole('button', { name: /click me/i });
     fireEvent.click(buttonElement);
     expect(mockOnClick).toHaveBeenCalledTimes(1);
