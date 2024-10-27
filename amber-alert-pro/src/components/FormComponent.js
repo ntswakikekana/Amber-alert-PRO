@@ -17,9 +17,9 @@ const FormComponent = () => {
   });
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-lg p-8 rounded-lg w-full md:w-1/2 lg:w-1/3">
-        <h1 className="text-3xl font-bold text-primary mb-6 text-center">Simple Form with Formik</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+        <h1 className="text-2xl font-bold mb-6 text-center">Simple Form with Formik</h1>
         <Formik
           initialValues={{ name: '', email: '', age: '' }}
           validationSchema={validationSchema}
@@ -31,43 +31,43 @@ const FormComponent = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="space-y-6">
+            <Form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Name:</label>
+                <label className="block text-gray-700">Name:</label>
                 <Field
                   type="text"
                   name="name"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />
-                <ErrorMessage name="name" component="div" className="text-red-600 text-sm mt-1" />
+                <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Email:</label>
+                <label className="block text-gray-700">Email:</label>
                 <Field
                   type="email"
                   name="email"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />
-                <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
+                <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Age:</label>
+                <label className="block text-gray-700">Age:</label>
                 <Field
                   type="number"
                   name="age"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />
-                <ErrorMessage name="age" component="div" className="text-red-600 text-sm mt-1" />
+                <ErrorMessage name="age" component="div" className="text-red-500 text-sm" />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md shadow-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 disabled:opacity-50"
               >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
+                Submit
               </button>
             </Form>
           )}
