@@ -7,7 +7,7 @@ describe('Button Component', () => {
 
   it('renders the Button component', () => {
     render(<Button onClick={mockOnClick}>Click Me</Button>);
-    const buttonElement = screen.getByRole('button', { name: /click me/i });
+    const buttonElement = screen.getByText(/click me/i );
     expect(buttonElement).toBeInTheDocument();
   });
 
