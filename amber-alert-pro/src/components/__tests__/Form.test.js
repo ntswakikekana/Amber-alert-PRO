@@ -7,7 +7,7 @@ describe('Form Component', () => {
 
   it('renders the Form component', () => {
     render(<Form onSubmit={mockOnSubmit} />);
-    const formElement = screen.getByRole('form');
+    const formElement = screen.getByTestId('form-element');
     expect(formElement).toBeInTheDocument();
   });
 
