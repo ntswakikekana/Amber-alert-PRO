@@ -33,8 +33,9 @@ const FormComponent = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label className="block text-gray-700">Name:</label>
+                <label htmlFor="name" className="block text-gray-700">Name:</label>
                 <Field
+		  id="name"
                   type="text"
                   name="name"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
@@ -43,8 +44,9 @@ const FormComponent = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700">Email:</label>
+                <label htmlFor="email" className="block text-gray-700">Email:</label>
                 <Field
+		  id="email"
                   type="email"
                   name="email"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
@@ -53,8 +55,9 @@ const FormComponent = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700">Age:</label>
+                <label htmlFor="age" className="block text-gray-700">Age:</label>
                 <Field
+		  id="age"
                   type="number"
                   name="age"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"

@@ -8,6 +8,8 @@ test('renders form component with fields and submit button', () => {
   expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
   // Check if the email input field is rendered
   expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+  // Check if the age input field is rendered
+  expect(screen.getByLabelText(/age/i)).toBeInTheDocument();
   // Check if the submit button is rendered
-  expect(screen.getByText(/submit/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
 });
