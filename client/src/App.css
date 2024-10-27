@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @keyframes blink {
     0% {
         opacity: 1;
@@ -10,251 +14,140 @@
     }
 }
 
+/* Body Styles */
 body {
-    display: flex;
-    margin: 0;
-    font-family: Arial, sans-serif;
+    @apply flex m-0 font-sans text-white;
     background-image: url('../images/child returned home.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #fff;
 }
 
 body.report-page {
-    background-image: url(../'images/child pulled from river.jpg');
+    background-image: url('../images/child pulled from river.jpg'); /* Fixed path */
 }
 
+/* Alert Box */
 #alert-box {
-    border: 5px solid orange;
-    padding: 20px;
-    color: white;
-    text-align: center;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    margin: auto;
+    @apply border-5 border-orange-500 p-5 text-white text-center w-4/5 max-w-lg rounded-lg bg-black bg-opacity-70 mx-auto;
 }
 
+/* Headings */
 h1 {
-    margin: 0;
-    font-size: 2em;
-    animation: blink 1s infinite alternate;
-    color: #ff6700;
+    @apply m-0 text-2xl animate-blink text-orange-500;
 }
 
+/* Alert Message */
 #alert-message {
-    margin-top: 10px;
-    font-size: 1.2em;
-    animation: blink 1s infinite alternate;
+    @apply mt-2 text-xl animate-blink;
 }
 
+/* Side Navigation */
 .sidenav {
-    height: 100vh;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #1a1a1a;
-    padding-top: 20px;
-    overflow-y: auto;
+    @apply h-screen w-64 fixed top-0 left-0 bg-gray-800 p-5 overflow-y-auto;
 }
 
 .sidenav a {
-    padding: 15px 25px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #ff6700;
-    display: block;
-    transition: background-color 0.3s, color 0.3s;
+    @apply p-4 text-lg text-orange-500 block transition-all duration-300;
 }
 
 .sidenav a:hover {
-    background-color: #ff6700;
-    color: #fff;
+    @apply bg-orange-500 text-white;
 }
 
+/* Main Content */
 #main-content {
-    margin-left: 250px;
-    padding: 20px;
-    width: calc(100% - 250px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    @apply ml-64 p-5 w-full flex justify-center items-center h-screen;
 }
 
+/* Report Form */
 #report-form {
-    font-weight: bold;
-    padding: 20px;
-    border-radius: 10px;
-    border: 5px solid orange;
-    width: 300px;
-    background-color: rgba(0, 0, 0, 0.7);
-    margin: auto;
-    color: blanchedalmond;
+    @apply font-bold p-5 rounded-lg border-5 border-orange-500 w-72 bg-black bg-opacity-70 mx-auto text-blanchedalmond;
 }
 
+/* Contact Form */
 #contact-form {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border: 5px solid orange;
-    border-radius: 10px;
-    margin: auto;
-    width: 80%;
-    max-width: 600px;
+    @apply bg-black bg-opacity-70 p-5 border-5 border-orange-500 rounded-lg mx-auto w-4/5 max-w-xl;
 }
 
+/* View Missing Section */
 #view-missing {
-    padding: 50px;
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
+    @apply py-12 w-full max-w-6xl flex flex-col items-center mx-auto;
 }
 
 #missing-persons-list {
-    margin-top: 20px;
-    width: 100%;
+    @apply mt-5 w-full;
 }
 
+/* Person Styles */
 .person {
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
+    @apply p-5 mb-5 rounded-lg bg-black bg-opacity-70 flex items-center w-full max-w-xl;
 }
 
 .person h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
-    color: #ff6700;
+    @apply m-0 mb-2 text-xl text-orange-500;
 }
 
 .person p {
-    margin: 5px 0;
-    color: #ccc;
+    @apply m-1 text-gray-300;
 }
 
 .person img {
-    max-width: 100px;
-    height: auto;
-    margin-right: 20px;
-    border-radius: 5px;
-    border: 2px solid #ff6700;
+    @apply max-w-24 h-auto mr-5 rounded-md border-2 border-orange-500;
 }
 
 /* Sign-Up Form Styles */
 #sign-up-form {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    border: 5px solid #ff6700;
-    width: 300px;
-    margin: auto;
-    color: #fff;
+    @apply bg-black bg-opacity-70 p-5 rounded-lg border-5 border-orange-500 w-72 mx-auto text-white;
 }
 
 #sign-up-form h2 {
-    text-align: center;
-    color: #ff6700;
+    @apply text-center text-orange-500;
 }
 
 #sign-up-form label {
-    display: block;
-    margin-top: 10px;
-    color: #ff6700;
+    @apply block mt-2 text-orange-500;
 }
 
 #sign-up-form input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ff6700;
-    border-radius: 5px;
-    background-color: #333;
-    color: #fff;
+    @apply w-full p-2 mt-1 border border-orange-500 rounded-md bg-gray-800 text-white;
 }
 
 #sign-up-form button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #ff6700;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
+    @apply w-full p-2 mt-5 bg-orange-500 text-white rounded-md cursor-pointer text-lg;
 }
 
 #sign-up-form button:hover {
-    background-color: #e65c00;
+    @apply bg-orange-600;
 }
 
+/* Login Form Styles */
 #login-form {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    border: 5px solid #ff6700;
-    width: 300px;
-    margin: auto;
-    color: #fff;
+    @apply bg-black bg-opacity-70 p-5 rounded-lg border-5 border-orange-500 w-72 mx-auto text-white;
 }
 
 #login-form h2 {
-    text-align: center;
-    color: #ff6700;
+    @apply text-center text-orange-500;
 }
 
 #login-form label {
-    display: block;
-    margin-top: 10px;
-    color: #ff6700;
+    @apply block mt-2 text-orange-500;
 }
 
 #login-form input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ff6700;
-    border-radius: 5px;
-    background-color: #333;
-    color: #fff;
+    @apply w-full p-2 mt-1 border border-orange-500 rounded-md bg-gray-800 text-white;
 }
 
 #login-form button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #ff6700;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
+    @apply w-full p-2 mt-5 bg-orange-500 text-white rounded-md cursor-pointer text-lg;
 }
 
 #login-form button:hover {
-    background-color: #e65c00;
+    @apply bg-orange-600;
 }
 
+/* Reset Password Box */
 #reset-password-box {
-    border: 5px solid orange;
-    padding: 20px;
-    color: white;
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    margin: auto;
+    @apply border-5 border-orange-500 p-5 text-white text-center w-4/5 max-w-md rounded-lg bg-black bg-opacity-70 mx-auto;
 }
 
