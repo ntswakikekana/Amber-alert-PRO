@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @keyframes blink {
     0% {
         opacity: 1;
@@ -14,140 +10,250 @@
     }
 }
 
-/* Body Styles */
 body {
-    @apply flex m-0 font-sans text-white;
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
     background-image: url('../images/child returned home.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    color: #fff;
 }
 
 body.report-page {
-    background-image: url('../images/child pulled from river.jpg'); /* Fixed path */
+    background-image: url(../'images/child pulled from river.jpg');
 }
 
-/* Alert Box */
 #alert-box {
-    @apply border-5 border-orange-500 p-5 text-white text-center w-4/5 max-w-lg rounded-lg bg-black bg-opacity-70 mx-auto;
+    border: 5px solid orange;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: auto;
 }
 
-/* Headings */
 h1 {
-    @apply m-0 text-2xl animate-blink text-orange-500;
+    margin: 0;
+    font-size: 2em;
+    animation: blink 1s infinite alternate;
+    color: #ff6700;
 }
 
-/* Alert Message */
 #alert-message {
-    @apply mt-2 text-xl animate-blink;
+    margin-top: 10px;
+    font-size: 1.2em;
+    animation: blink 1s infinite alternate;
 }
 
-/* Side Navigation */
 .sidenav {
-    @apply h-screen w-64 fixed top-0 left-0 bg-gray-800 p-5 overflow-y-auto;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1a1a1a;
+    padding-top: 20px;
+    overflow-y: auto;
 }
 
 .sidenav a {
-    @apply p-4 text-lg text-orange-500 block transition-all duration-300;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ff6700;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .sidenav a:hover {
-    @apply bg-orange-500 text-white;
+    background-color: #ff6700;
+    color: #fff;
 }
 
-/* Main Content */
 #main-content {
-    @apply ml-64 p-5 w-full flex justify-center items-center h-screen;
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Report Form */
 #report-form {
-    @apply font-bold p-5 rounded-lg border-5 border-orange-500 w-72 bg-black bg-opacity-70 mx-auto text-blanchedalmond;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid orange;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: auto;
+    color: blanchedalmond;
 }
 
-/* Contact Form */
 #contact-form {
-    @apply bg-black bg-opacity-70 p-5 border-5 border-orange-500 rounded-lg mx-auto w-4/5 max-w-xl;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border: 5px solid orange;
+    border-radius: 10px;
+    margin: auto;
+    width: 80%;
+    max-width: 600px;
 }
 
-/* View Missing Section */
 #view-missing {
-    @apply py-12 w-full max-w-6xl flex flex-col items-center mx-auto;
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
 #missing-persons-list {
-    @apply mt-5 w-full;
+    margin-top: 20px;
+    width: 100%;
 }
 
-/* Person Styles */
 .person {
-    @apply p-5 mb-5 rounded-lg bg-black bg-opacity-70 flex items-center w-full max-w-xl;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
 }
 
 .person h2 {
-    @apply m-0 mb-2 text-xl text-orange-500;
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    color: #ff6700;
 }
 
 .person p {
-    @apply m-1 text-gray-300;
+    margin: 5px 0;
+    color: #ccc;
 }
 
 .person img {
-    @apply max-w-24 h-auto mr-5 rounded-md border-2 border-orange-500;
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: 2px solid #ff6700;
 }
 
 /* Sign-Up Form Styles */
 #sign-up-form {
-    @apply bg-black bg-opacity-70 p-5 rounded-lg border-5 border-orange-500 w-72 mx-auto text-white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid #ff6700;
+    width: 300px;
+    margin: auto;
+    color: #fff;
 }
 
 #sign-up-form h2 {
-    @apply text-center text-orange-500;
+    text-align: center;
+    color: #ff6700;
 }
 
 #sign-up-form label {
-    @apply block mt-2 text-orange-500;
+    display: block;
+    margin-top: 10px;
+    color: #ff6700;
 }
 
 #sign-up-form input {
-    @apply w-full p-2 mt-1 border border-orange-500 rounded-md bg-gray-800 text-white;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ff6700;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 #sign-up-form button {
-    @apply w-full p-2 mt-5 bg-orange-500 text-white rounded-md cursor-pointer text-lg;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #ff6700;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
 #sign-up-form button:hover {
-    @apply bg-orange-600;
+    background-color: #e65c00;
 }
 
-/* Login Form Styles */
 #login-form {
-    @apply bg-black bg-opacity-70 p-5 rounded-lg border-5 border-orange-500 w-72 mx-auto text-white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid #ff6700;
+    width: 300px;
+    margin: auto;
+    color: #fff;
 }
 
 #login-form h2 {
-    @apply text-center text-orange-500;
+    text-align: center;
+    color: #ff6700;
 }
 
 #login-form label {
-    @apply block mt-2 text-orange-500;
+    display: block;
+    margin-top: 10px;
+    color: #ff6700;
 }
 
 #login-form input {
-    @apply w-full p-2 mt-1 border border-orange-500 rounded-md bg-gray-800 text-white;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ff6700;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 #login-form button {
-    @apply w-full p-2 mt-5 bg-orange-500 text-white rounded-md cursor-pointer text-lg;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #ff6700;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
 #login-form button:hover {
-    @apply bg-orange-600;
+    background-color: #e65c00;
 }
 
-/* Reset Password Box */
 #reset-password-box {
-    @apply border-5 border-orange-500 p-5 text-white text-center w-4/5 max-w-md rounded-lg bg-black bg-opacity-70 mx-auto;
+    border: 5px solid orange;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: auto;
 }
-
