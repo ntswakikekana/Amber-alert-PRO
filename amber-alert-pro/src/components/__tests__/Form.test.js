@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Form from '../Form';
 
 describe('Form Component', () => {
-  const mockOnSubmit = jest.fn();
+  const mockOnSubmit = jest.fn((e) => e.preventDefault());
 
   it('renders the Form component', () => {
     render(<Form onSubmit={mockOnSubmit} />);
