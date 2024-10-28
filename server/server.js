@@ -1,5 +1,6 @@
 // backend/server.js
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
 import connectDB from './config/db.js'; // Import the connectDB function
@@ -17,6 +18,7 @@ await connectDB();
 // Middleware
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(cookieParser()); // Parse cookies
 
 
 // Router to all routes
