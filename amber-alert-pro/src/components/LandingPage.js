@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Add this import
+import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Importing icons
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const LandingPage = () => {
   return (
@@ -24,6 +24,17 @@ const LandingPage = () => {
       <footer className="bg-blue-600 w-full py-6 text-center text-white mt-auto">
         <p>© 2024 Amber-alert PRO. All rights reserved.</p>
         <p>Contact us at: info@amberalertpro.com</p>
+        <div className="flex justify-center mt-4 space-x-4">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <FaFacebook className="mx-2 hover:text-orange-500 cursor-pointer" />
+          </a>
+          <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <FaTwitter className="mx-2 hover:text-orange-500 cursor-pointer" />
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <FaInstagram className="mx-2 hover:text-orange-500 cursor-pointer" />
+          </a>
+        </div>
       </footer>
     </div>
   );

@@ -1,9 +1,12 @@
 import React from 'react';
-import NavBar from './NavBar';
+import NavBar from './NavBar'; // Keep NavBar imported
 
 const AboutUs = () => {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-orange-500 min-h-screen flex flex-col items-center text-white p-6">
+      {/* NavBar at the top */}
+      <NavBar />
+
       <h1 className="text-4xl font-bold mt-8 mb-4">About Us</h1>
       <p className="max-w-3xl text-center mb-6 text-lg italic">
         Every day, thousands of people go missing around the world, with estimates suggesting that 
@@ -25,4 +28,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-

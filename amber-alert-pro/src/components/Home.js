@@ -2,13 +2,16 @@ import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Importing icons
 import NavBar from './NavBar'; // Ensure you have the NavBar component imported
 import { Link } from 'react-router-dom'; // Import Link for navigation
-
+import SomeComponent from '../components/SomeComponent'; // Import SomeComponent
 
 const Home = () => {
   return (
     <div>
       <NavBar />
       <div className="min-h-screen bg-gradient-to-r from-blue-500 to-orange-500 flex flex-col items-center">
+        {/* Welcome message based on login status */}
+        <SomeComponent /> {/* Display login status */}
+
         {/* Introduction Section */}
         <div className="text-center text-white my-8">
           <h1 className="text-5xl font-bold mb-4">Welcome to Amber-alert PRO</h1>
@@ -19,8 +22,8 @@ const Home = () => {
           </p>
         </div>
 
-         {/* Buttons Section */}
-         <div className="flex flex-col space-y-4 mb-8">
+        {/* Buttons Section */}
+        <div className="flex flex-col space-y-4 mb-8">
           <Link to="/view-missing" className="bg-white text-blue-500 font-bold py-2 px-4 rounded hover:bg-gray-100 transition duration-300">
             View Missing
           </Link>
