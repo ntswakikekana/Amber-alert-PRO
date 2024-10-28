@@ -1,55 +1,86 @@
-// src/components/ContactPolice.js
-import React from 'react';
+import React, { useState } from 'react';
+import NavBar from './NavBar';
 
-// ContactPolice component for contacting local police
 const ContactPolice = () => {
-    return (
-        <div id="main-content">
-            <div id="contact-form">
-                <h1>Contact Local Police Station</h1>
-                <div id="alert-box-background">
-                    <h2>Instructions:</h2>
-                    <p>Please fill out the form below to contact your local police station. Provide as much detail as possible to help us assist you better.</p>
-                </div>
-                {/* Form for contacting police */}
-                <form id="contact-police-form" action="submit_contact.php" method="POST">
-                    {/* Input for your name */}
-                    <label htmlFor="name">Your Name:</label><br />
-                    <input type="text" id="name" name="name" required /><br /><br />
+  const [location, setLocation] = useState('');
+  const [policeContact, setPoliceContact] = useState('');
 
-                    {/* Input for your email */}
-                    <label htmlFor="email">Your Email:</label><br />
-                    <input type="email" id="email" name="email" required /><br /><br />
+  // Simulated function to get the local police contact based on the location
+  const handleSearchPolice = (e) => {
+    e.preventDefault();
 
-                    {/* Input for your phone number */}
-                    <label htmlFor="phone">Your Phone Number:</label><br />
-                    <input type="tel" id="phone" name="phone" required /><br /><br />
+    // Example data, replace with actual data-fetching logic
+    const policeContacts = {
+      'New York': 'NYPD: +1 555-123-4567',
+      'Los Angeles': 'LAPD: +1 555-987-6543',
+      'Chicago': 'CPD: +1 555-234-5678',
+    };
 
-                    {/* Dropdown for your location */}
-                    <label htmlFor="location">Your Location:</label><br />
-                    <select id="location" name="location" required>
-                        <option value="">Select Location</option>
-                        <option value="New York">New York</option>
-                        <option value="Los Angeles">Los Angeles</option>
-                        <option value="Chicago">Chicago</option>
-                        <option value="Houston">Houston</option>
-                        <option value="Phoenix">Phoenix</option>
-                    </select><br /><br />
+    if (policeContacts[location]) {
+      setPoliceContact(policeContacts[location]);
+    } else {
+      setPoliceContact('No contact information available for this location.');
+    }
+  };
 
-                    {/* Text area for message */}
-                    <label htmlFor="message">Message:</label><br />
-                    <textarea id="message" name="message" rows="4" required></textarea><br /><br />
+  return (
+    <div className="bg-gradient-to-r from-blue-500 to-orange-500 min-h-screen flex flex-col">
+      <NavBar />
+      <div className="flex flex-col items-center text-white my-8 px-4">
+        <h1 className="text-4xl font-bold mb-6">Contact Local Authorities</h1>
 
-                    {/* Submit button for sending message */}
-                    <button type="submit">Submit</button>
-                </form>
-                <div id="form-message" style={{ display: 'none', marginTop: '20px', color: 'green' }}>
-                    Your message has been sent successfully! {/* Confirmation message */}
-                </div>
+        {/* Short paragraph explaining the purpose */}
+        <p className="italic text-lg text-center mb-6 max-w-3xl">
+          Amber Alert PRO helps you contact local authorities to report or gather information on missing persons 
+          quickly based on your location.
+        </p>
+
+        {/* Form to search police contacts */}
+        <div className="w-full max-w-xl bg-white bg-opacity-10 p-6 rounded-lg">
+          <form onSubmit={handleSearchPolice}>
+            <div className="mb-4">
+              <label className="block text-white text-lg font-semibold mb-2" htmlFor="location">
+                Enter Your Location
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full px-4 py-2 rounded bg-white bg-opacity-20 text-white"
+                placeholder="e.g. New York"
+                required
+              />
             </div>
+
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-white text-blue-500 px-4 py-2 rounded hover:bg-orange-500 hover:text-white transition duration-300"
+              >
+                Search Police Contact
+              </button>
+            </div>
+          </form>
+
+          {/* Display police contact after search */}
+          {policeContact && (
+            <div className="mt-6 bg-white bg-opacity-10 p-4 rounded text-center">
+              <h2 className="text-xl font-semibold">Police Contact Information</h2>
+              <p className="text-lg">{policeContact}</p>
+            </div>
+          )}
         </div>
-    );
+      </div>
+
+      <footer className="bg-blue-600 w-full py-6 text-center text-white mt-auto">
+        <p>© 2024 Amber-alert PRO. All rights reserved.</p>
+        <p>Contact us at: info@amberalertpro.com</p>
+      </footer>
+    </div>
+  );
 };
 
-export default ContactPolice; // Export ContactPolice component
+export default ContactPolice;
 
