@@ -1,27 +1,56 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
 import Login from '../Login';
+
+const mockStore = configureStore([]);
+const store = mockStore({});
 
 describe('Login Page', () => {
   it('renders the Login page', () => {
-    render(<Login />);
-    const loginHeading = screen.getByText('Login to Your Account');
-    expect(loginHeading).toBeInTheDocument();
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
+    );
+    const headingElement = screen.getByText(/login to amber-alert pro/i);
+    expect(headingElement).toBeInTheDocument();
   });
 
-  it('contains username and password fields', () => {
-    render(<Login />);
-    const usernameField = screen.getByLabelText('Username');
-    const passwordField = screen.getByLabelText('Password');
-    expect(usernameField).toBeInTheDocument();
+  it('contains email and password fields', () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    const emailField = screen.getByPlaceholderText(/enter your email/i);
+    const passwordField = screen.getByPlaceholderText(/enter your password/i);
+    expect(emailField).toBeInTheDocument();
     expect(passwordField).toBeInTheDocument();
   });
 
-  it('submits the login form when the login button is clicked', () => {
-    const mockSubmit = jest.fn();
-    render(<Login onSubmit={mockSubmit} />);
+  it('submits the form when login button is clicked', () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
+    );
+
     const loginButton = screen.getByRole('button', { name: /login/i });
     fireEvent.click(loginButton);
-    expect(mockSubmit).toHaveBeenCalledTimes(1);
+
+    // check the dispatch here.
+    const actions = store.getActions();
+    expect(actions[0].type).toBe('auth/login');
   });
 });
+
