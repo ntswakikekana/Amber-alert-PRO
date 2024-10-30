@@ -1,7 +1,3 @@
-Here’s a revised and organized version of your README:
-
----
-
 ## Backend
 
 ### Installation
@@ -31,7 +27,3 @@ Here’s a revised and organized version of your README:
 
 5. **Access the server**  
    The server will be running at [http://localhost:3000](http://localhost:3000).
-
---- 
-
-This cleaned-up format follows a consistent numbering sequence and includes links and brief descriptions for clarity.
