@@ -1,21 +1,37 @@
-# # Backend
+Here’s a revised and organized version of your README:
 
-# ## Installation
+---
 
-# 1. Install the dependencies
-# ```bash
-# npm install
-# ```
-# 3. Make sure you have MongoDB installed and running
-# ```bash
-# sudo systemctl start mongod
-# ```
-# 4. Create a .env file with the following content
-# ```env
-# MONGO_URL=mongodb://localhost:27017/amber_db
-# ```
-# 5. Start the server
-# ```bash
-# npm run start
-# ```
-# 5. The server will be running on http://localhost:3000
+## Backend
+
+### Installation
+
+1. **Install the dependencies**  
+   ```bash
+   npm install
+   ```
+
+2. **Ensure MongoDB is installed and running**  
+   Start MongoDB with the following command:
+   ```bash
+   sudo systemctl start mongod
+   ```
+
+3. **Create a `.env` file**  
+   Add the following content to configure your MongoDB connection:
+   ```env
+   MONGO_URL=mongodb://localhost:27017/amber_db
+   ```
+
+4. **Start the server**  
+   Run the server with:
+   ```bash
+   npm run start
+   ```
+
+5. **Access the server**  
+   The server will be running at [http://localhost:3000](http://localhost:3000).
+
+--- 
+
+This cleaned-up format follows a consistent numbering sequence and includes links and brief descriptions for clarity.
