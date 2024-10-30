@@ -1,85 +1,34 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
-import { generateToken, verifyToken } from "../middleware/authMiddleware.js";
+import { generateToken, requireAuth } from "../middleware/authMiddleware.js";
 
 // Loads env variables
 import dotenv from "dotenv";
 dotenv.config();
 
-// POST /users - Create a new user
-export async function createUser(req, res) {
+// GET / - Get all users
+export async function getUsers(req, res) {
   try {
-    console.log(req.body);
-    const newUser = new User(req.body); // Assuming req.body has the user data
-
-    const token = generateToken(newUser._id);
-    res.cookie("token", token, { httpOnly: true });
-    await newUser.save();
-
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
     res
-      .status(201)
-      .json({ message: "User created successfully", newUser, token });
-  } catch (error) {
-    if (error.name === "ValidationError") {
-      // Extract validation errors and send a more user-friendly response
-      const errors = Object.values(error.errors).map((err) => err.message);
-      return res.status(400).json({
-        message: "User validation failed",
-        error: errors[0],
-      });
-    } else if (error.code === 11000) {
-      // 11000 is the code for duplicate key error
-      const field = Object.keys(error.keyValue)[0];
-      const value = error.keyValue[field];
-
-      const errMsg = `The ${field} <${value}> is already in use. Please choose another ${field}.`;
-      return res.status(400).json({
-        message: "Error creating user",
-        error: errMsg,
-      });
-    }
-    return res.status(500).json({
-      message: "An unexpected error occurred while creating the user",
-      error: error.message,
-    });
+      .status(500)
+      .json({ message: "Error retrieving users", error: error.message });
   }
 }
 
-// POST /login - Authenticate a user and return a JWT
-export async function loginUser(req, res) {
-  const { phone, password } = req.body;
-
-  try {
-    // Find the user by phone number
-    const user = await User.findOne({ phone });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Compare the entered password with the stored hashed password
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-
-    // Generate JWT if password matches
-    const token = generateToken(user._id);
-
-    res.status(200).json({
-      message: "Login successful",
-      token,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Error logging in", error: error.message });
-  }
-}
-
-// GET /users/:id - Gets a user
+// GET / - Get user by username
 export async function getUser(req, res) {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({ username: req.params.username });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+
+    if (req.user.username !== req.params.username && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Unauthorized" });
     }
     res.json(user);
   } catch (error) {
@@ -89,13 +38,14 @@ export async function getUser(req, res) {
   }
 }
 
-// DELETE /:id - Delete user by ID
+// DELETE /:id - Delete user by username
 export async function deleteUser(req, res) {
+  console.log("Deleting user", req.params);
   try {
     const { password } = req.body;
 
     // Find the user by ID
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({ username: req.params.username }, 'username password');
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -113,10 +63,53 @@ export async function deleteUser(req, res) {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
+    // Check if the user is deleting their own account
+    if (req.user.username !== req.params.username && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
     // If password is correct, delete the user
-    await User.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(user._id);
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting user", error });
+  }
+}
+
+// PUT /:id - Update user by username
+export async function updateUser(req, res) {
+  try {
+    // Check if the user exist
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the user is updating their own account
+    if (req.user.username !== req.params.username && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    // Update the user
+    try {
+      await User.findByIdAndUpdate( req.user.id, req.body, { new: true, runValidators: true })
+    } catch (error) {
+      return res.status(400).json({ message: "Error updating user", error: error.message });
+    }
+
+    res.json({ message: "User updated successfully"});
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({
+        message: "User validation failed",
+        error: errors[0],
+      });
+    }
+
+    return res.status(500).json({
+      message: "An unexpected error occurred while updating the user",
+      error: error.message,
+    });
   }
 }

@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js'; // Import the connectDB function
 import userRoutes from './routes/userRoutes.js'; // Import the user routes
 import reportRoutes from './routes/reportRoutes.js'; // Import the report routes
+import authRoutes from './routes/authRoutes.js'; // Import the auth routes
+import { checkUser } from './middleware/authMiddleware.js'; // Import the checkUser middleware
 
 
 dotenv.config();
@@ -22,8 +24,10 @@ app.use(cookieParser()); // Parse cookies
 
 
 // Router to all routes
+app.use('*', checkUser); // Check if user is logged in
 app.use('/user', userRoutes); // Use Router on userRoutes
 app.use('/report', reportRoutes); // Use Router on reportRoutes
+app.use('/auth', authRoutes); // Use Router on authRoutes
 
 // Start server
 const PORT = process.env.PORT || 5000;

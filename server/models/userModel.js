@@ -13,6 +13,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    immutable: true
   },
   email: {
     type: String,
@@ -27,7 +28,7 @@ const userSchema = new Schema({
   lastname: {type: String, required: false},
   phone: {type: String, required: true, unique: true},
   image: {type: String, required: false},
-  role: {type: String, default: "user"}
+  role: {type: String, default: "user", enum: ["user", "admin"] },
 },
   {timestamps: true}
 );
@@ -40,6 +41,15 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+//Add a pre-update hook for admin premissions
+userSchema.pre('findOneAndUpdate', async function(next) {
+  const doc = await this.model.findOne(this.getQuery());
+  console.log('role', this._update.role);
+  if (this._update.role && doc.role !== 'admin') {
+      return next(new Error('Only an admin can modify the name field.'));
+  }
+  next();
+});
 
 //Creates a model from User Schema
 const User = mongoose.model('User', userSchema);
