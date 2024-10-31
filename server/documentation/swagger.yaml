@@ -1,0 +1,368 @@
+openapi: 3.0.0
+info:
+  title: API Documentation For Amber Alert Pro
+  version: 1.0.0
+  description: This is the API documentation for the application.
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: User
+    description: User operations
+  - name: Report
+    description: Report operations
+  - name: Auth
+    description: Authentication operations
+paths:
+  /user/{username}:
+    get:
+      tags:
+        - User
+      summary: Get a user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          example: johndoe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - User
+      summary: Update a user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          example: johndoe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - User
+      summary: Delete a user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          example: johndoe
+      responses:
+        '200':
+          description: User deleted successfully
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+  /user/:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+  /report/:
+    get:
+      tags:
+        - Report
+      summary: Get all reports
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Report
+      summary: Create a report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+      responses:
+        '201':
+          description: Report created successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+  /report/{id}:
+    get:
+      tags:
+        - Report
+      summary: Get a report
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f4e7b3b7f6b9b0017b3b7f6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - Report
+      summary: Update a report
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f4e7b3b7f6b9b0017b3b7f6
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+      responses:
+        '200':
+          description: Report updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Report
+      summary: Delete a report
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f4e7b3b7f6b9b0017b3b7f6
+      responses:
+        '200':
+          description: Report deleted successfully
+        '401':
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      summary: Signup a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: Invalid input
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login an existing user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: strongpassword
+      responses:
+        '200':
+          description: Successful login
+        '401':
+          description: Unauthorized
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout an existing user
+      responses:
+        '200':
+          description: Successful logout
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          example: johndoe
+        email:
+          type: string
+          example: john@mail.com
+        password:
+          type: string
+          example: strongpassword
+        firstname:
+          type: string
+          example: John
+        lastname:
+          type: string
+          example: Doe
+        phone:
+          type: string
+          example: 254712345678
+        image:
+          type: string
+          example: https://example.com/image.jpg
+        role:
+          type: string
+          example: user
+          enum:
+            - user
+            - admin
+    Report:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Sarah Johnson
+        missingAge:
+          type: number
+          example: 25
+        description:
+          type: object
+          properties:
+            hairColor:
+              type: string
+              example: black
+            eyeColor:
+              type: string
+              example: brown
+            height:
+              type: string
+              example: 5'6"
+            weight:
+              type: string
+              example: 60kg
+            race:
+              type: string
+              example: African
+            gender:
+              type: string
+              example: female
+            otherDetails:
+              type: string
+              example: has a scar on the left cheek
+        circumstances:
+          type: string
+          example: Last seen at the bus stop near the mall
+        missingFrom:
+          type: object
+          properties:
+            city:
+              type: string
+              example: Angul
+            state:
+              type: string
+              example: Odisha
+            country:
+              type: string
+              example: India
+            coordinates:
+              type: object
+              properties:
+                longitude:
+                  type: number
+                  example: 20.84089
+                latitude:
+                  type: number
+                  example: 86.76924
+        missingDate:
+          type: string
+          example: 2020-09-01T12:00:00.000Z
+        status:
+          type: string
+          enum:
+            - active
+            - resolved
+            - inactive
+          default: active
+        imageUrl:
+          type: string
+          example: https://example.com/image.jpg
+        createdBy:
+          type: string
+          example: 5f4e7b3b7f6b9b0017f3b1d1
+          required: true
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT

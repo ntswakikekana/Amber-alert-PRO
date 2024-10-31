@@ -1,0 +1,49 @@
+/auth/signup:
+  post:
+    tags:
+      - Auth
+    summary: Signup a new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    responses:
+      '201':
+        description: User registered successfully
+      '400':
+        description: Invalid input
+/auth/login:
+  post:
+    tags:
+      - Auth
+    summary: Login an existing user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                example: johndoe
+              password:
+                type: string
+                example: strongpassword
+    responses:
+      '200':
+        description: Successful login
+      '401':
+        description: Unauthorized
+/auth/logout:
+  get:
+    tags:
+      - Auth
+    summary: Logout an existing user
+    responses:
+      '200':
+        description: Successful logout
+      '401':
+        description: Unauthorized
