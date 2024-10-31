@@ -9,7 +9,6 @@ export async function createReport(req, res) {
       return res.status(403).json({ message: 'Unauthorized' });
     }
     req.body.createdBy = req.user.id;
-    console.log('req.body', req.body);
     const newReport = new Report(req.body);
     await newReport.save();
 

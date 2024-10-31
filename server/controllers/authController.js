@@ -8,7 +8,7 @@ export async function signup(req, res) {
   try {
     const newUser = new User(req.body); // Assuming req.body has the user data
 
-    const token = generateToken(newUser._id, newUser.username);
+    const token = generateToken(newUser._id, newUser.username, newUser.role);
     res.cookie("token", token, { httpOnly: true });
     await newUser.save();
 
@@ -28,7 +28,7 @@ export async function signup(req, res) {
       const field = Object.keys(error.keyValue)[0];
       const value = error.keyValue[field];
 
-      const errMsg = `The ${field} <${value}> is already in use. Please choose another ${field}.`;
+      const errMsg = `The ${field} ${value} is already in use. Please choose another ${field}.`;
       return res.status(400).json({
         message: "Error creating user",
         error: errMsg,
@@ -43,11 +43,11 @@ export async function signup(req, res) {
 
 // POST /login - Authenticate a user and return a JWT
 export async function login(req, res) {
-  const { phone, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    // Find the user by phone number
-    const user = await User.findOne({ phone });
+    // Find the user by username number
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
