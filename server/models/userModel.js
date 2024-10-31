@@ -13,7 +13,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    immutable: true
+    trim: true,
+    lowercase: true,
+    immutable: true,
+    // Make sure the username does not contain special characters or spaces
+    validate: {
+      validator: function(v) {
+        return /^[a-z0-9_]*$/.test(v);
+      }, message: props => `${props.value} is not a valid username! Only letters, numbers, and underscores are allowed.`
+    }
   },
   email: {
     type: String,
@@ -44,7 +52,6 @@ userSchema.pre('save', async function(next) {
 //Add a pre-update hook for admin premissions
 userSchema.pre('findOneAndUpdate', async function(next) {
   const doc = await this.model.findOne(this.getQuery());
-  console.log('role', this._update.role);
   if (this._update.role && doc.role !== 'admin') {
       return next(new Error('Only an admin can modify the name field.'));
   }

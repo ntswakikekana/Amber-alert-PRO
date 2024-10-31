@@ -4,8 +4,8 @@ dotenv.config();
 
 
 // Helper function to generate a JWT
-export const generateToken = (id, username) => {
-    return jwt.sign({ id, username }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+export const generateToken = (id, username, role) => {
+    return jwt.sign({ id, username, role }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
   };
 
 
@@ -28,7 +28,7 @@ export function requireAuth(req, res, next) {
 
 // Middleware to verify admin
 export function requireAdmin(req, res, next) {
-  if (req.user && req.user.isAdmin) {
+  if (req.user && req.user.role === 'admin') {
     next();
   } else {
     return res.status(403).json({ message: 'Not authorized as an admin' });

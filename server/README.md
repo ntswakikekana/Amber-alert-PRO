@@ -18,4 +18,5 @@
 # ```bash
 # npm run start
 # ```
-# 5. The server will be running on http://localhost:3000
+# 5. The server will be running on http://localhost:5000
+# 6. You can find the API documentation on http://localhost:4000/api-docs

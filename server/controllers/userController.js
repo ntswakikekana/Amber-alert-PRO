@@ -8,6 +8,9 @@ dotenv.config();
 
 // GET / - Get all users
 export async function getUsers(req, res) {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
   try {
     const users = await User.find();
     res.json(users);
@@ -40,7 +43,6 @@ export async function getUser(req, res) {
 
 // DELETE /:id - Delete user by username
 export async function deleteUser(req, res) {
-  console.log("Deleting user", req.params);
   try {
     const { password } = req.body;
 
