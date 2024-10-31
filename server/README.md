@@ -13,6 +13,8 @@
    sudo systemctl start mongod
    ```
 
+   **If you don't want to install MongoDB on your machine, you can use remote MongoDB services like MongoDB Atlas.**
+
 3. **Create a `.env` file**  
    Add the following content to configure your MongoDB connection:
    ```env
