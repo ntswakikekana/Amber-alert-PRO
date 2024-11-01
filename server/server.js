@@ -29,7 +29,7 @@ await connectDB();
 
 // Enable CORS
 app.use(cors({
-  origin: `http://localhost:${process.env.DOC_PORT}`,
+  origin: `http://localhost:${DOC_PORT}`,
 }));
 
 // Middleware
